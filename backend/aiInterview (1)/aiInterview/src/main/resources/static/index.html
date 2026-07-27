@@ -1,47 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>AI Interview Preparation</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Interview Preparation System</title>
+
 
     <style>
 
         body{
             font-family: Arial;
             margin:40px;
+            background:#f5f5f5;
         }
+
 
         .box{
+
             border:1px solid black;
+
             padding:20px;
+
             margin-top:20px;
+
+            background:white;
+
+            border-radius:10px;
+
         }
+
 
         button{
-            padding:10px;
+
+            padding:10px 15px;
+
             margin:5px;
+
             cursor:pointer;
+
         }
 
+
         textarea{
+
             width:400px;
+
             height:100px;
+
         }
+
+
+        input{
+
+            padding:10px;
+
+            width:300px;
+
+        }
+
 
     </style>
 
+
 </head>
 
+
+
 <body>
+
 
 
 <h1>AI Interview Preparation System</h1>
 
 
-<!-- Start Interview -->
 
-<div class="box">
+<!-- Start Interview Section -->
+
+<div class="box" id="startSection">
+
 
     <h3>Start Interview</h3>
+
 
     <input
             type="text"
@@ -50,7 +93,9 @@
 
 
     <button onclick="startInterview()">
+
         Start Interview
+
     </button>
 
 
@@ -58,12 +103,15 @@
 
 
 
-<!-- Questions -->
 
-<div class="box" id="questionSection" style="display:none">
+
+<!-- Questions Section -->
+
+<div class="box" id="questionSection" style="display:none;">
 
 
     <h3>Select Question</h3>
+
 
     <div id="questionList"></div>
 
@@ -73,25 +121,37 @@
 
 
 
-<!-- Answer -->
 
-<div class="box" id="answerSection" style="display:none">
+<!-- Answer Section -->
+
+<div class="box" id="answerSection" style="display:none;">
 
 
     <h3 id="selectedQuestion"></h3>
 
 
+
     <textarea
             id="answer"
             placeholder="Enter your answer">
-</textarea>
+    </textarea>
 
 
     <br>
 
 
     <button onclick="submitAnswer()">
+
         Submit Answer
+
+    </button>
+
+
+
+    <button onclick="nextQuestion()">
+
+        Next Question
+
     </button>
 
 
@@ -100,9 +160,10 @@
 
 
 
-<!-- Feedback -->
 
-<div class="box" id="feedbackSection" style="display:none">
+<!-- Feedback Section -->
+
+<div class="box" id="feedbackSection" style="display:none;">
 
 
     <h3>Evaluation</h3>
@@ -110,12 +171,8 @@
 
     <p id="score"></p>
 
+
     <p id="feedback"></p>
-
-
-    <button onclick="nextQuestion()">
-        Next Question
-    </button>
 
 
 </div>
@@ -123,15 +180,17 @@
 
 
 
-<!-- Final Result -->
 
-<div class="box" id="resultSection" style="display:none">
+<!-- Final Result Section -->
+
+<div class="box" id="resultSection" style="display:none;">
 
 
     <h2>Final Result</h2>
 
 
     <p id="finalScore"></p>
+
 
     <p id="overallFeedback"></p>
 
@@ -140,8 +199,13 @@
 
 
 
-<script src="script.js"></script>
+
+
+<script src="/script.js"></script>
+
 
 
 </body>
+
+
 </html>

@@ -7,18 +7,16 @@ let currentIndex = 0;
 let selectedQuestion = "";
 
 
-
 // ===============================
 // START INTERVIEW
 // ===============================
 
 async function startInterview() {
 
-
     let role = document.getElementById("role").value;
 
 
-    if(role.trim() === "") {
+    if (role.trim() === "") {
 
         alert("Please enter job role");
 
@@ -29,23 +27,30 @@ async function startInterview() {
     try {
 
 
-        let response = await fetch("/api/interview/start"),
-            {
+        let response = await fetch("/api/interview/start", {
 
-                method: "POST",
+            method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-                body: JSON.stringify({
+            body: JSON.stringify({
 
-                    role: role
+                role: role
 
-                })
+            })
 
-            }
-        );
+        });
+
+
+
+        if (!response.ok) {
+
+            throw new Error("Failed to start interview");
+
+        }
+
 
 
         let data = await response.json();
@@ -72,7 +77,6 @@ async function startInterview() {
         showQuestions();
 
 
-
     }
     catch(error) {
 
@@ -81,7 +85,6 @@ async function startInterview() {
         alert("Unable to start interview");
 
     }
-
 
 }
 
@@ -97,7 +100,7 @@ function showQuestions() {
     let html = "";
 
 
-    questions.forEach((question,index)=>{
+    questions.forEach((question, index) => {
 
 
         html += `
@@ -124,10 +127,7 @@ function showQuestions() {
     document.getElementById("questionSection")
         .style.display = "block";
 
-
 }
-
-
 
 
 
@@ -158,11 +158,7 @@ function selectQuestion(index) {
     document.getElementById("answer")
         .value = "";
 
-
 }
-
-
-
 
 
 
@@ -173,8 +169,9 @@ function selectQuestion(index) {
 async function submitAnswer() {
 
 
-    let answer =
-        document.getElementById("answer").value;
+    let answer = document
+        .getElementById("answer")
+        .value;
 
 
 
@@ -183,6 +180,7 @@ async function submitAnswer() {
         alert("Please enter answer");
 
         return;
+
     }
 
 
@@ -190,29 +188,34 @@ async function submitAnswer() {
     try {
 
 
-        let response = await fetch(
-            "/api/interview/evaluate",
-            {
+        let response = await fetch("/api/interview/evaluate", {
 
-                method:"POST",
+            method:"POST",
 
-                headers:{
-                    "Content-Type":"application/json"
-                },
+            headers:{
+                "Content-Type":"application/json"
+            },
 
 
-                body:JSON.stringify({
+            body:JSON.stringify({
 
-                    interviewId: interviewId,
+                interviewId: interviewId,
 
-                    question: selectedQuestion,
+                question: selectedQuestion,
 
-                    answer: answer
+                answer: answer
 
-                })
+            })
 
-            }
-        );
+        });
+
+
+
+        if(!response.ok){
+
+            throw new Error("Evaluation failed");
+
+        }
 
 
 
@@ -250,11 +253,7 @@ async function submitAnswer() {
 
     }
 
-
 }
-
-
-
 
 
 
@@ -288,12 +287,7 @@ function nextQuestion() {
 
     }
 
-
 }
-
-
-
-
 
 
 
@@ -309,9 +303,17 @@ async function showFinalResult() {
 
         let response = await fetch(
 
-            `http://localhost:8081/api/interview/result/${interviewId}`
+            `/api/interview/result/${interviewId}`
 
         );
+
+
+
+        if(!response.ok){
+
+            throw new Error("Result not found");
+
+        }
 
 
 
@@ -348,6 +350,7 @@ async function showFinalResult() {
             + result.overallFeedback;
 
 
+
     }
     catch(error){
 
@@ -356,6 +359,5 @@ async function showFinalResult() {
         alert("Result loading failed");
 
     }
-
 
 }
